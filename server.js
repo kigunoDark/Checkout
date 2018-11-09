@@ -28,8 +28,10 @@ app.get("/", function(req, res) {
 });
 
 //Routes
-var authRoute = require("./app/routes/auth.js")(app);
+var authRoute = require("./app/routes/auth.js")(app, passport);
 
+//load passport strategies
+require("./app/config/passport/passport.js")(passport, models.user);
 //For Handlebars
 app.set("views", "./app/views");
 app.engine(
