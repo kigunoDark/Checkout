@@ -27,6 +27,9 @@ app.get("/", function(req, res) {
   res.send("Welcome to Passport with Sequelize");
 });
 
+//Routes
+var authRoute = require("./app/routes/auth.js")(app);
+
 //For Handlebars
 app.set("views", "./app/views");
 app.engine(
