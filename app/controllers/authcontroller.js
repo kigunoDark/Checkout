@@ -1,5 +1,7 @@
 var exports = (module.exports = {});
-
+exports.landing = (req, res) => {
+  res.render("landingPage");
+};
 exports.signup = function(req, res) {
   res.render("signUpPage");
 };
@@ -12,6 +14,9 @@ exports.mainmap = function(req, res) {
   res.render("mapPage");
 };
 
+exports.aboutus = (req, res) => {
+  res.render("aboutUsPage");
+};
 exports.logout = function(req, res) {
   req.session.destroy(function(err) {
     res.redirect("/");

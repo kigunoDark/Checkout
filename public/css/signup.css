@@ -1,0 +1,126 @@
+.reg_su {
+  z-index: 10;
+  position: absolute;
+  top: 90px;
+  width: 100%;
+
+  /* border: 1px solid red; */
+}
+
+.reg_form_su {
+  font-family: AmaticSC-Regular;
+  /* border: 1px solid green; */
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.reg_form_su > label {
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+  font-size: 30px;
+  color: white;
+}
+
+#login {
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 15px 0px 15px;
+  font-size: 30px;
+  color: black;
+  width: 50%;
+}
+
+.btn_reg_su {
+<<<<<<< HEAD
+  border: none;
+  font-size: 35px;
+  color: black;
+  margin-top: 40px;
+  padding: 10px 15px 10px 15px;
+  border-radius: 5px;
+  background: white;
+=======
+    font-family: AmaticSC-Bold;
+    border: none;
+    font-size: 35px;
+    color: black;
+    margin-top: 40px;
+    padding: 10px 15px 10px 15px;
+    border-radius: 5px;
+    background: white;  
+>>>>>>> 9db296fb59a0798fd9e35fd68f005d1a80b32b59
+}
+
+.btn_reg_su:hover {
+  background: lightgrey;
+  transition: 0.5s;
+}
+.btn_reg_su:blur {
+    background: lightgrey;
+    transition: 0.5s;
+}
+
+#email {
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 15px 0 px 15px;
+  font-size: 30px;
+  color: black;
+  width: 50%;
+}
+#fio {
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 15px 0 px 15px;
+  font-size: 30px;
+  color: black;
+  width: 50%;
+}
+#pass {
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 15px 0 px 15px;
+  font-size: 30px;
+  color: black;
+  width: 50%;
+}
+
+#passval {
+  margin-left: 10px;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  padding: 0px 15px 0 px 15px;
+  font-size: 30px;
+  color: black;
+  width: 50%;
+}
+
+.container_su {
+  margin-top: 90px;
+}
+
+@media screen and (max-height: 700px) {
+  .reg_form_su > label {
+    font-size: 20px;
+    margin-top: 20px;
+  }
+  #login,
+  #email,
+  #fio,
+  #pass {
+    font-size: 20px;
+    width: 40%;
+  }
+  .btn_reg_su {
+    font-size: 20px;
+  }
+}

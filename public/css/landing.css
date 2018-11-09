@@ -1,0 +1,67 @@
+.container {
+  height: 100vh;
+  padding: 0;
+  /* border: 1px solid red; */
+  width: 100%;
+  margin: 0;
+}
+
+.carus {
+  width: 100%;
+}
+.info_land {
+  /* border: 1px solid green; */
+}
+
+.singup_btn_land {
+  text-align: center;
+  width: 250px;
+  color: #777;
+  padding: 10px 20px 10px 20px;
+  border-radius: 5px;
+  background: white;
+  margin: auto;
+}
+
+.singup_btn_land:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.submit_div {
+  padding: 0;
+  margin: auto;
+  margin-top: 40px;
+  width: 250px;
+  /* border: 1px solid black; */
+}
+
+.text_land {
+  width: 50%;
+  margin: auto;
+  color: white;
+  text-align: center;
+  font-family: AmaticSC-Regular;
+  font-size: 50px;
+}
+
+.main_info_land {
+  position: absolute;
+  /* border: 1px solid red; */
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 150px;
+}
+
+.car_img_land {
+  width: 100%;
+  height: 100vh;
+}
+
+.car_img_land img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 0;
+}

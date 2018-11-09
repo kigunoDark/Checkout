@@ -1,0 +1,144 @@
+/* FONTS */
+@font-face {
+    font-family: AmaticSC-Bold; /* Гарнитура шрифта */
+    src: url(./../fonts/AmaticSC-Bold.ttf); /* Путь к файлу со шрифтом */
+}
+@font-face {
+    font-family: AmaticSC-Regular; /* Гарнитура шрифта */
+    src: url(./../fonts/AmaticSC-Regular.ttf); /* Путь к файлу со шрифтом */
+}
+body {
+    background: #64a0c2; 
+    overflow: visible;
+    font-family: AmaticSC-Bold;
+    font-size: 35px;
+    margin: 0;
+}
+
+#SearchInHeader {
+    display: none;
+}
+
+.myhead {
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.5);
+    border-radius: 0px;
+    position: absolute;
+    top: 0; 
+    z-index: 15;
+    width: 100%;
+    height: 90px;
+}
+
+footer {
+    border: none;
+    box-shadow: 0px -10px 50px rgba(0, 0, 0, 0.5);
+    padding: 10px 0 10px 10px;
+    z-index: 15;
+    position: absolute;
+    bottom: -198px;
+    width: 100%;
+    background: white;
+}
+
+.overl { 
+    width: 100%;
+    height: 100vh;
+    opacity: 0.5;
+    position: absolute;
+    z-index: 1;
+}
+.overl img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 0;
+}
+.backg_with_dark {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+}
+
+.cop_footer {
+    margin-bottom: -20px; 
+    text-align: right;
+    display: block;
+    font-size: 20px;
+}
+.info_footer {
+    padding: 10px;
+    font-size: 25px;
+    /* border: 1px solid black; */
+}
+.info_footer_contacts{
+    display: inline-block;
+    /* border: 1px solid black; */
+    width: 10%;
+}
+.info_footer_div{
+    display: inline-block;
+    /* border: 1px solid black; */
+    width: 20%;
+}
+.info_footer > div > a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+.info_footer > div > p {
+    color: #64a0c2;
+}
+.info_footer > div{
+    vertical-align: top;
+}
+
+.txt_footer {
+    display: inline-block;
+}
+ .slider {
+     box-shadow: 0 0px 20px 10px rgba(0, 0, 0, 0.3);
+     display: none;
+     background: rgba(255, 255, 255, 0.5);
+     padding: 30px 20px 20px 20px;
+     border-radius: 15px;
+     color:white;
+     text-align: center;
+     z-index: 11;
+     position: absolute;
+     top: 80px;
+     width: 200px;
+     right: 185px;
+     /* border:1px solid red; */
+ }
+
+ .form_sld {
+     /* border:1px solid green; */
+ }
+
+ .lg_sld {
+     box-shadow: 0 0px 20px 5px rgba(0, 0, 0, 0.2);
+     opacity: 0;
+     color: #777;
+     margin-bottom: 10px;
+     text-align: center;
+     border-radius: 5px;
+     border: none;
+     padding: 5px;
+     font-size: 30px;
+     width: 0;
+ }
+
+ .sgin_btn {
+     opacity: 0;
+     width: 0;
+     color: black;
+     border-radius: 5px;
+ }
+
+ .container {
+    height: 100vh;
+    padding: 0;
+    /* border: 1px solid red; */
+    width: 100%;
+    margin: 0;
+}
