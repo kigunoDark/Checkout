@@ -3,6 +3,7 @@ var passport = require("passport");
 var session = require("express-session");
 var bodyParser = require("body-parser");
 var env = require("dotenv").load();
+var exphbs = require("express-handlebars");
 var app = express();
 
 //For BodyParser
@@ -26,6 +27,15 @@ app.get("/", function(req, res) {
   res.send("Welcome to Passport with Sequelize");
 });
 
+//For Handlebars
+app.set("views", "./app/views");
+app.engine(
+  "hbs",
+  exphbs({
+    extname: ".hbs"
+  })
+);
+app.set("view engine", ".hbs");
 //Sync Database
 models.sequelize
   .sync()
