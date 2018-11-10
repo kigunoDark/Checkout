@@ -4,7 +4,7 @@ module.exports = function(app, passport) {
   app.get("/", authController.landing);
   app.get("/aboutus", authController.aboutus);
   app.get("/signup", authController.signup);
-  app.get("/signin", authController.signin);
+  // app.get("/signin", authController.signin);
   app.get("/checkout", isLoggedIn, authController.mainmap);
   app.get("/logout", authController.logout);
   app.post(
@@ -21,7 +21,7 @@ module.exports = function(app, passport) {
     passport.authenticate("local-signin", {
       successRedirect: "/checkout",
 
-      failureRedirect: "/signin"
+      failureRedirect: "/"
     })
   );
 

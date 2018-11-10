@@ -62,9 +62,11 @@
   </nav>
   <div class="slider" id="sld_sgin">
     <div class="form_sld">
-      <input type="text" id="sliderlogin" placeholder="Логин" class="lg_sld"><br>
-      <input type="password" id="sliderpass" placeholder="Пароль" class="lg_sld"><br>
-      <button class="sgin_btn" id="sliderin">Войти</button>
+      <form id="signin" name="signin" method="post" action="signin">
+        <input type="text" id="sliderlogin" placeholder="email" name="email" class="lg_sld"><br>
+        <input type="password" name="password" id="sliderpass" placeholder="Пароль" class="lg_sld"><br>
+        <button class="sgin_btn" id="sliderin">Войти</button>
+      </form>
     </div>
   </div>
 

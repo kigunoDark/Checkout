@@ -1,17 +1,17 @@
 <div class="container_su">
     <div class="reg_su">
-        <form class="reg_form_su" action="">
-            <label> Введите ваше Ф.И.О.<br>
-                <input type="text" id="fio" placeholder="Ф.И.О.">
+        <form class="reg_form_su" id="signup" name="signup" method="post" action="/signup">
+            <label for="email"> Введите ваше Email<br>
+                <input type="email" id="email" name="email" placeholder="Email address">
             </label>
-            <label> Введите уникальный логин <br>
-                <input type="text" id="login" placeholder="Логин">
+            <label for="firstname"> Введите Имя <br>
+                <input type="text" id="login" name="firstname" placeholder="Имя">
             </label>
-            <label> Введите ваш пароль <br>
-                <input type="password" id="pass" placeholder="Пароль">
+            <label for="lastname"> Введите ваш Фамилию <br>
+                <input type="text" id="pass" name="lastname" placeholder="Фамилия">
             </label>
-            <label> Введите ваш email<br>
-                <input type="text" id="email" placeholder="Email">
+            <label for="password"> Введите ваш Пароль<br>
+                <input type="password" id="email" name="password" placeholder="Пароль">
             </label>
             <button class="btn_reg_su">Зарегистрироваться</button>
         </form>
