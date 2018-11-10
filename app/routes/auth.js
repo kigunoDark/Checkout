@@ -4,7 +4,6 @@ module.exports = function(app, passport) {
   app.get("/", authController.landing);
   app.get("/aboutus", authController.aboutus);
   app.get("/signup", authController.signup);
-  // app.get("/signin", authController.signin);
   app.get("/checkout", isLoggedIn, authController.mainmap);
   app.get("/logout", authController.logout);
   app.post(
@@ -28,6 +27,6 @@ module.exports = function(app, passport) {
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
 
-    res.redirect("/signin");
+    res.redirect("/");
   }
 };

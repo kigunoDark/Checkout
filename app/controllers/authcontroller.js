@@ -11,7 +11,7 @@ exports.signin = function(req, res) {
 };
 
 exports.mainmap = function(req, res) {
-  res.render("mapPage");
+  res.render("mapPage", { title: "no", firstname: req.get("firstname") });
 };
 
 exports.aboutus = (req, res) => {
