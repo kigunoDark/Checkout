@@ -1,3 +1,67 @@
 <div class="container">
   <div id="map"></div>
+  <script src="./js/map.js"></script>
+
+  <!-- Event window -->
+  <div class="modal fade" id="eventWindow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header modal-title_map">
+          <h5 class="modal-title" id="eventWindowTitle_map">Создание события</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="eventForm_map" method="post" action="/users/checkout">
+            <input type="text" class="form-control event_map" id="eventName" name="eventName" placeholder="Название события">
+            <input type="text" class="form-control event_map" id="eventDesc" name="eventDesc" placeholder="Описание события">
+            <select class="select_mod_wnd" id="slct_mod">
+              <option>Фестиваль</option>
+              <option>Выставка</option>
+              <option>Концерт</option>
+              <option>Трансляция</option>
+              <option>Конфернеция</option>
+              <option>Вечеринка</option>
+              <option>Деловое Мероприятие</option>
+              <option>Другое</option>
+            </select>
+            <a data-dismiss="modal"><i class="fas fa-times-circle manip_map"></i></a>
+            <a onclick="saveBtn()"><i class="fas fa-plus-circle manip_map"></i></a>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Event marker window -->
+  <div class="modal fade" id="eventMarkerWindow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header modal-title_map">
+          <h5 class="modal-title " id="eventMarkerTitle">Тут должно быть название события</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <span id="description"> </span>
+          <label id="modal_address">Address here</label>
+        </div>
+        <div class="modal-footer">
+          <button id="deleteRoutBtn" type="button" class="btn btn-primary manip_btn_map " onclick="deleteRout()" style="margin-top: 8px;">Убрать
+            маршрут</button>
+          <button type="button" class="btn btn-primary manip_btn_map " onclick="routeMe()" style="margin-top: 8px; ">Проложить
+            маршрут</button>
+          <button type="button" class="btn btn-primary manip_btn_map " data-dismiss="modal" style="margin-top: 8px; ">Отмена</button>
+          <button type="button" class="btn btn-secondary manip_btn_map " onclick="deleteMarkerBtn()" style="margin-top: 8px;">Удалить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 </div>
