@@ -144,6 +144,10 @@ footer {
   /* border:1px solid red; */
 }
 
+.searchplace {
+  height: 40px;
+}
+
 .form_sld {
   /* border:1px solid green; */
 }
@@ -175,7 +179,8 @@ footer {
 
 .profile_btn:hover {
   text-decoration: none;
-  color: #777;
+  color: white;
+  background: #64a0c2;
 }
 
 .logout_btn {

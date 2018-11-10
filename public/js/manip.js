@@ -33,7 +33,13 @@ $("#signin").bind("click", function() {
       },
       150
     );
-
+    $("#sliderpadw").animate(
+      {
+        opacity: 1,
+        width: "100%"
+      },
+      150
+    );
     $("#sliderout").animate(
       {
         opacity: 1,

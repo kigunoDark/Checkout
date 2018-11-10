@@ -21,6 +21,9 @@
   <link rel="stylesheet" href="css/aboutus.css" type="text/css">
   <link rel="stylesheet" href="css/map.css" type="text/css">
 
+  {{!-- Font awesome --}}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    crossorigin="anonymous">
 
   {{!-- Ссылки для карты --}}
   <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css?dp-version=1533195059" />
@@ -37,6 +40,9 @@
   <nav class="navbar navbar-default myhead" style="margin:0;">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
+
+
+      {{#if title }}
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
           aria-expanded="false">
@@ -45,34 +51,25 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/" style="font-size: 50px; margin: 15px 10px 0 0;"><b style="color:black">Check</b><b
+        <a class="navbar-brand" href="/checkout" style="font-size: 50px; margin: 15px 10px 0 0;"><b style="color:black">Check</b><b
             style="color:#64a0c2;">Out</b></a>
       </div>
 
-
-      {{#if title }}
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
 
         </ul>
-        {{!-- <form class="navbar-form navbar-left my_search_header_txt" style="margin:15px 0 0 0" id="SearchInHeader">
-          --}}
-          {{!-- <div id="search" class="header_search">
-            awdawd
-          </div> --}}
-
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left" style="margin:15px 0 0 0" id="SearchInHeader">
-
-              <input type="text" class="my_search_header_txt" id="SearchTextHeader" placeholder="Введите, что хотите найти">
-
-            </form>
+        <form class="navbar-form navbar-left" style="margin:15px 0 0 0" id="SearchInHeader">
+          <div class="form-group">
+            <input type="text" class="searchplace form-control" placeholder="Поиск" style="font-size: 30px;">
+          </div>
 
         </form>
         <ul class="nav navbar-nav navbar-right">
 
-          <li><a href="#" id="signin" style="margin:15px 0 0 0">Профиль</a></li>
+          <li><a href="#" id="signin" style="margin:15px 0 0 0">Профиль <i class="far fa-address-card"></i></a> </i>
+          </li>
         </ul>
         </li>
         </ul>
@@ -83,26 +80,34 @@
     <div class="form_sld">
 
 
-      <a href="/logout" class="profile_btn" id="sliderprf">Профиль</a>
-      <a href="/logout" class="profile_btn" id="sliderpev">События</a>
-      <a href="/logout" class="profile_btn" id="sliderprt">Рейтинг</a>
-      <a href="/logout" class="logout_btn" id="sliderout">Выйти</a>
+      <a href="#" class="profile_btn" id="sliderprf">Профиль <i class="fas fa-user-tie"></i></a>
+      <a href="#" class="profile_btn" id="sliderpev">События <i class="fas fa-star-half-alt"></i></a>
+      <a href="#" class="profile_btn" id="sliderpadw">Награды <i class="fas fa-award"></i></a>
+      <a href="#" class="profile_btn" id="sliderprt">Рейтинг <i class="fas fa-crown"></i></a>
+      <a href="/logout" class="profile_btn " id="sliderout">Выйти <i class="fas fa-sign-out-alt"></i></a>
       </form>
     </div>
   </div>
 
   {{else}}
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+      aria-expanded="false">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/" style="font-size: 50px; margin: 15px 10px 0 0;"><b style="color:black">Check</b><b
+        style="color:#64a0c2;">Out</b></a>
+  </div>
+
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
 
     </ul>
-    <form class="navbar-form navbar-left" style="margin:15px 0 0 0" id="SearchInHeader">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search" style="font-size: 20px;">
-      </div>
-      <button type="submit" class="btn btn-default" style="font-size: 20px;">Найти</button>
-    </form>
+
     <ul class="nav navbar-nav navbar-right">
       <li><a href="/aboutus" style="margin:15px 0 0 0">О нас</a></li>
       <li><a href="#" id="signin" style="margin:15px 0 0 0">Войти</a></li>
@@ -118,7 +123,7 @@
       <form id="signin" name="signin" method="post" action="signin">
         <input type="text" id="sliderlogin" placeholder="email" name="email" class="lg_sld"><br>
         <input type="password" name="password" id="sliderpass" placeholder="Пароль" class="lg_sld"><br>
-        <button class="sgin_btn" id="sliderin">Войти</button>
+        <button class="sgin_btn" id="sliderin">Войти <i class="fas fa-sign-out-alt"></i></button>
       </form>
     </div>
   </div>
