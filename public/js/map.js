@@ -39,8 +39,10 @@ let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
 let ui = H.ui.UI.createDefault(map, defaultLayers, "ru-RU");
 
+polygonGroup = new H.map.Group();
 eventMarkerGroup = new H.map.Group();
 map.addObject(eventMarkerGroup);
+map.addObject(polygonGroup);
 let eventMarkerDict = {};
 var eventCoords = null,
   myCoords = null,
@@ -201,6 +203,32 @@ function toMyPos() {
     map.setCenter(myCoords);
     map.setZoom(20);
   });
+}
+
+function addPolylineToMap(map) {
+  var lineString = new H.geo.LineString();
+
+  lineString.pushPoint({ lat: 59.923979397315065, lng: 30.243786260604963 });
+  lineString.pushPoint({ lat: 59.92300081597148, lng: 30.24283139419566 });
+  lineString.pushPoint({ lat: 59.92350624070856, lng: 30.241307899475117 });
+  lineString.pushPoint({ lat: 59.92398477405591, lng: 30.24014918518077 });
+  lineString.pushPoint({ lat: 59.924877300960354, lng: 30.238486215591536 });
+  lineString.pushPoint({ lat: 59.925560121599005, lng: 30.24064271163951 });
+  lineString.pushPoint({ lat: 59.92522140130636, lng: 30.24096457672121 });
+  lineString.pushPoint({ lat: 59.92484504136994, lng: 30.2417263240815261 });
+  lineString.pushPoint({ lat: 59.92470524944917, lng: 30.241887256622334 });
+  lineString.pushPoint({ lat: 59.924242856592095, lng: 30.243056699752827 });
+
+  polygonGroup.addObject(
+    new H.map.Polygon(lineString, {
+      style: {
+        fillColor: "rgba(0,0,255,0.2)",
+        strokeColor: "rgba(0,0,255,0.4)",
+        lineWidth: 1
+      }
+    })
+  );
+  console.log("awdaw");
 }
 
 function routeMe() {
@@ -383,3 +411,5 @@ function checkInEvent() {
     }
   });
 }
+
+addPolylineToMap();
