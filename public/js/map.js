@@ -404,11 +404,6 @@ function checkInEvent() {
       let valutaLabel = document.querySelector("label#valuta");
       valutaLabel.innerText = 1000;
     }
-    if (flg) {
-      alert("+1000 monet");
-    } else {
-      alert("Sorry...");
-    }
   });
 }
 
