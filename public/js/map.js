@@ -2,20 +2,37 @@ const APP_ID = "uQgXmDHpClihPvIaeCwh";
 const APP_CODE = "D6ItEPBOD7ArAPx6Fxa4uA";
 
 let platform = new H.service.Platform({
-    'app_id': APP_ID,
-    'app_code': APP_CODE,
-    useCIT: true,
-    useHTTPS: true
+  app_id: APP_ID,
+  app_code: APP_CODE,
+  useCIT: true,
+  useHTTPS: true
 });
+
+const myInit = {
+  method: "get"
+};
+
+fetch("http://localhost:3000/checkout.json", myInit)
+  .then(res => res.json())
+  .then(res => {
+    console.log(res);
+    for (i = 0; i < res["base"].length; i++) {
+      console.log(res["base"][i]);
+      marker = new H.map.Marker({
+        lat: res["base"][i].lat,
+        lng: res["base"][i].lng
+      });
+      marker.label = res["base"][i].evName;
+      eventMarkerGroup.addObject(marker);
+      eventMarkerDict[marker.label] = [res["base"][i].evInfo, marker];
+    }
+  });
 
 let defaultLayers = platform.createDefaultLayers();
 
-let map = new H.Map(
-    document.getElementById('map'),
-    defaultLayers.normal.map,
-    {
-        zoom: 16,
-        center: { lat: 59.92513, lng: 30.24075 }
+let map = new H.Map(document.getElementById("map"), defaultLayers.normal.map, {
+  zoom: 16,
+  center: { lat: 59.92513, lng: 30.24075 }
 });
 
 let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
@@ -25,99 +42,110 @@ let ui = H.ui.UI.createDefault(map, defaultLayers, "ru-RU");
 eventMarkerGroup = new H.map.Group();
 map.addObject(eventMarkerGroup);
 let eventMarkerDict = {};
-var eventCoords = null, startCoords = null, selectedMarker = null, polyline = null;
+var eventCoords = null,
+  startCoords = null,
+  selectedMarker = null,
+  polyline = null;
 
-map.addEventListener('tap', function(evt) {
-    eventCoords =  map.screenToGeo(evt.currentPointer.viewportX, evt.currentPointer.viewportY);
-    var target = evt.target;
-    if (target instanceof mapsjs.map.Marker) {
-      reverseGeocode(platform);
-      selectedMarker = target.label;
-      let eventMarkerWindowTitle = document.querySelector('h5#eventMarkerTitle');
-      let eventMarkerWindowDesc = document.querySelector('span#description');
-      eventMarkerWindowDesc.innerText = eventMarkerDict[selectedMarker][0];
-      eventMarkerWindowTitle.innerText = selectedMarker;
-      $('#eventMarkerWindow').modal();
-    } else {
-        $('#eventWindow').modal();
-    }
+map.addEventListener("tap", function(evt) {
+  eventCoords = map.screenToGeo(
+    evt.currentPointer.viewportX,
+    evt.currentPointer.viewportY
+  );
+  var target = evt.target;
+  if (target instanceof mapsjs.map.Marker) {
+    reverseGeocode(platform);
+    selectedMarker = target.label;
+    let eventMarkerWindowTitle = document.querySelector("h5#eventMarkerTitle");
+    let eventMarkerWindowDesc = document.querySelector("span#description");
+    eventMarkerWindowDesc.innerText = eventMarkerDict[selectedMarker][0];
+    eventMarkerWindowTitle.innerText = selectedMarker;
+    $("#eventMarkerWindow").modal();
+  } else {
+    console.log(eventCoords);
+    let eventMarkerWindowlng = document.querySelector("input#lng");
+    let eventMarkerWindowlat = document.querySelector("input#lat");
+    eventMarkerWindowlng.value = eventCoords.lng;
+    eventMarkerWindowlat.value = eventCoords.lat;
+    $("#eventWindow").modal();
+  }
 });
 
 function saveBtn() {
-    $('#eventWindow').modal('hide');
-    marker = new H.map.Marker(eventCoords);
-    marker.label = document.getElementById("eventName").value;
-    eventMarkerGroup.addObject(marker);
-    eventMarkerDict[marker.label] = [document.getElementById("eventDesc").value, marker];
-    document.getElementById('eventForm').reset();
+  $("#eventWindow").modal("hide");
+  marker = new H.map.Marker(eventCoords);
+  marker.label = document.getElementById("eventName").value;
+  eventMarkerGroup.addObject(marker);
+  eventMarkerDict[marker.label] = [
+    document.getElementById("eventDesc").value,
+    marker
+  ];
+  document.getElementById("eventForm").reset();
 }
 
 function geocode(platform) {
-    var geocoder = platform.getGeocodingService(),
-        geocodingParameters = {
-            searchText: searchVal,
-            jsonattributes : 1
-        };
+  var geocoder = platform.getGeocodingService(),
+    geocodingParameters = {
+      searchText: searchVal,
+      jsonattributes: 1
+    };
 
-    geocoder.search(
-        geocodingParameters,
-        onSuccess,
-        onError
-    );
+  geocoder.search(geocodingParameters, onSuccess, onError);
 }
 
 function onSuccess(result) {
-    if (result.details != 'Empty input String') {
-      if (result.response.view[0] != undefined) {
-        var locations = result.response.view[0].result;
-        addLocationsToMap(locations);
-      } else {
-          alert('Location not found...')
-      }
+  if (result.details != "Empty input String") {
+    if (result.response.view[0] != undefined) {
+      var locations = result.response.view[0].result;
+      addLocationsToMap(locations);
+    } else {
+      alert("Location not found...");
     }
+  }
 }
 
 function onError(error) {
-    alert('Connection error... Try again later');
+  alert("Connection error... Try again later");
 }
 
-function addLocationsToMap(locations){
-    var position,
-        i;
+function addLocationsToMap(locations) {
+  var position, i;
 
-    if (locations[0].location != undefined) {
-        for (i = 0;  i < locations.length; i += 1) {
-            position = {
-                lat: locations[i].location.displayPosition.latitude,
-                lng: locations[i].location.displayPosition.longitude
-            };
-            
-        }
-    } else {
-        for (i = 0;  i < locations.length; i += 1) {
-            position = {
-                lat: locations[i].place.locations[0].displayPosition.latitude,
-                lng: locations[i].place.locations[0].displayPosition.longitude
-            };
-            
-        }
+  if (locations[0].location != undefined) {
+    for (i = 0; i < locations.length; i += 1) {
+      position = {
+        lat: locations[i].location.displayPosition.latitude,
+        lng: locations[i].location.displayPosition.longitude
+      };
     }
-    
-    // Add the locations group to the map
-    map.setCenter(position);
-    map.setZoom(16);
+  } else {
+    for (i = 0; i < locations.length; i += 1) {
+      position = {
+        lat: locations[i].place.locations[0].displayPosition.latitude,
+        lng: locations[i].place.locations[0].displayPosition.longitude
+      };
+    }
+  }
+
+  // Add the locations group to the map
+  map.setCenter(position);
+  map.setZoom(16);
 }
 
 function deleteMarkerBtn() {
-    if (selectedMarker == undefined) {
-        eventMarkerGroup.removeObject(eventMarkerDict[document.querySelector('h5#eventMarkerTitle').innerText]);
-        delete eventMarkerDict[document.querySelector('h5#eventMarkerTitle').innerText];
-        $('#eventMarkerWindow').modal('hide');
-    } else {
-        eventMarkerGroup.removeObject(eventMarkerDict[selectedMarker][1]);
-        delete eventMarkerDict[selectedMarker];
-        $('#eventMarkerWindow').modal('hide');
-    }
+  if (selectedMarker == undefined) {
+    eventMarkerGroup.removeObject(
+      eventMarkerDict[document.querySelector("h5#eventMarkerTitle").innerText]
+    );
+    delete eventMarkerDict[
+      document.querySelector("h5#eventMarkerTitle").innerText
+    ];
+    $("#eventMarkerWindow").modal("hide");
+  } else {
+    eventMarkerGroup.removeObject(eventMarkerDict[selectedMarker][1]);
+    delete eventMarkerDict[selectedMarker];
+    $("#eventMarkerWindow").modal("hide");
+  }
 }
 
 // function getData(ready, url) {
@@ -144,15 +172,13 @@ function deleteMarkerBtn() {
 // }, url);
 
 function myPosition() {
-  navigator.geolocation.getCurrentPosition(
-    function(position) {
-        startCoords = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        }
-        calculateRouteFromAtoB(platform);
-    }
-  );
+  navigator.geolocation.getCurrentPosition(function(position) {
+    startCoords = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+    calculateRouteFromAtoB(platform);
+  });
 }
 
 function routeMe() {
@@ -161,26 +187,21 @@ function routeMe() {
     //TODO: ПОЯВЛЯЕТСЯ КНОПКА УДАЛИТЬ МАРШРУТ
   }
   myPosition();
-  $('#eventMarkerWindow').modal('hide');
+  $("#eventMarkerWindow").modal("hide");
 }
 
-function calculateRouteFromAtoB (platform) {
+function calculateRouteFromAtoB(platform) {
   var router = platform.getRoutingService(),
     routeRequestParams = {
-      mode: 'fastest;car',
-      representation: 'display',
-      routeattributes : 'waypoints,summary,shape,legs',
-      maneuverattributes: 'direction,action',
-      waypoint0: 'geo!' + startCoords.lat + ',' + startCoords.lng, // A
-      waypoint1: 'geo!' + eventCoords.lat + ',' + eventCoords.lng  // B
+      mode: "fastest;car",
+      representation: "display",
+      routeattributes: "waypoints,summary,shape,legs",
+      maneuverattributes: "direction,action",
+      waypoint0: "geo!" + startCoords.lat + "," + startCoords.lng, // A
+      waypoint1: "geo!" + eventCoords.lat + "," + eventCoords.lng // B
     };
 
-
-  router.calculateRoute(
-    routeRequestParams,
-    onSuccessRoute,
-    onErrorRoute
-  );
+  router.calculateRoute(routeRequestParams, onSuccessRoute, onErrorRoute);
 }
 
 function onSuccessRoute(result) {
@@ -190,22 +211,22 @@ function onSuccessRoute(result) {
 }
 
 function onErrorRoute(error) {
-  alert('Ooops!');
+  alert("Ooops!");
 }
 
-function addRouteShapeToMap(route){
+function addRouteShapeToMap(route) {
   var lineString = new H.geo.LineString(),
     routeShape = route.shape;
 
   routeShape.forEach(function(point) {
-    var parts = point.split(',');
+    var parts = point.split(",");
     lineString.pushLatLngAlt(parts[0], parts[1]);
   });
 
   polyline = new H.map.Polyline(lineString, {
     style: {
       lineWidth: 8,
-      strokeColor: 'rgba(0, 128, 255, 1)'
+      strokeColor: "rgba(0, 128, 255, 1)"
     }
   });
   // Add the polyline to the map
@@ -215,12 +236,15 @@ function addRouteShapeToMap(route){
 }
 
 function getCookie(name) {
-  var matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-  ));
+  var matches = document.cookie.match(
+    new RegExp(
+      "(?:^|; )" +
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+        "=([^;]*)"
+    )
+  );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
-  
 
 function setCookie(name, value, options) {
   options = options || {};
@@ -254,10 +278,10 @@ function setCookie(name, value, options) {
 function reverseGeocode(platform) {
   var geocoder = platform.getGeocodingService(),
     reverseGeocodingParameters = {
-      prox: '' + eventCoords.lat + ',' + eventCoords.lng + ',150',
-      mode: 'retrieveAddresses',
-      maxresults: '1',
-      jsonattributes : 1
+      prox: "" + eventCoords.lat + "," + eventCoords.lng + ",150",
+      mode: "retrieveAddresses",
+      maxresults: "1",
+      jsonattributes: 1
     };
 
   geocoder.reverseGeocode(
@@ -268,12 +292,13 @@ function reverseGeocode(platform) {
 }
 
 function onReverseSuccess(result) {
-  let eventMarkerWindowAdress = document.querySelector('label#modal_address');
-  eventMarkerWindowAdress.innerText = result.response.view[0].result[0].location.address.label;
+  let eventMarkerWindowAdress = document.querySelector("label#modal_address");
+  eventMarkerWindowAdress.innerText =
+    result.response.view[0].result[0].location.address.label;
 }
 
 function onReverseError(error) {
-  alert('Ooops!');
+  alert("Ooops!");
 }
 
 var searchVal = null;
@@ -284,5 +309,5 @@ function enterSearch() {
 
 function deleteRout() {
   map.removeObject(polyline);
-  $('#eventMarkerWindow').modal('hide');
+  $("#eventMarkerWindow").modal("hide");
 }

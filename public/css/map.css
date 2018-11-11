@@ -2,6 +2,12 @@
   width: 100%;
   height: 100vh;
 }
+
+#lng {
+}
+.noneNeed {
+  display: none;
+}
 .modal-title_map {
   background: #64a0c2;
   color: white;
@@ -16,8 +22,8 @@
   height: 40px;
   font-size: 20px;
   background: white;
-  color: #64a0c2;
-  border-color: #64a0c2;
+  color: black;
+  border-color: black;
 }
 .manip_btn_map:hover {
   height: 40px;

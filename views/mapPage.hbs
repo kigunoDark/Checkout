@@ -13,10 +13,12 @@
           </button>
         </div>
         <div class="modal-body">
-          <form id="eventForm_map" method="post" action="/users/checkout">
-            <input type="text" class="form-control event_map" id="eventName" name="eventName" placeholder="Название события">
-            <input type="text" class="form-control event_map" id="eventDesc" name="eventDesc" placeholder="Описание события">
-            <select class="select_mod_wnd" id="slct_mod">
+          <form id="eventForm_map" method="post" action="/checkout">
+            <input type="text" class="form-control event_map" id="eventName" name="evName" placeholder="Название события">
+            <input type="text" class="form-control event_map" id="eventDesc" name="evInfo" placeholder="Описание события">
+            <input type="text" class="form-control event_map noneNeed" id="lng" name="lng">
+            <input type="text" class="form-control event_map noneNeed" id="lat" name="lat">
+            <select class="select_mod_wnd" id="slct_mod" name="evType">
               <option>Фестиваль</option>
               <option>Выставка</option>
               <option>Концерт</option>
@@ -26,8 +28,9 @@
               <option>Деловое Мероприятие</option>
               <option>Другое</option>
             </select>
-            <a data-dismiss="modal"><i class="fas fa-times-circle manip_map"></i></a>
-            <a onclick="saveBtn()"><i class="fas fa-plus-circle manip_map"></i></a>
+            {{!-- <a data-dismiss="modal"><i class="fas fa-times-circle manip_map"></i></a>
+            <a><i class="fas fa-plus-circle manip_map"></i></a> --}}
+            <button onclick="saveBtn()" class="btn_reg_su">Зарегистрироваться</button>
           </form>
 
 

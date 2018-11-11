@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="css/signup.css" type="text/css">
   <link rel="stylesheet" href="css/aboutus.css" type="text/css">
   <link rel="stylesheet" href="css/map.css" type="text/css">
+  <link rel="stylesheet" href="css/profile.css" type="text/css">
 
   {{!-- Font awesome --}}
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
@@ -31,7 +32,7 @@
   <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
   <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
   <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
-
+  <script src="./js/mapser.js"></script>
   <title>CheckOut</title>
 </head>
 
@@ -60,15 +61,14 @@
         <ul class="nav navbar-nav">
 
         </ul>
-        <form class="navbar-form navbar-left" style="margin:15px 0 0 0" id="SearchInHeader">
-          <div class="form-group">
-            <input type="text" class="searchplace form-control" placeholder="Поиск" style="font-size: 30px;">
-          </div>
-
-        </form>
+        <div class="search_header form-group">
+          <input type="text" class="searchplace form-control" id="SearchTextHeader" onchange="enterSearch()"
+            placeholder="Поиск" style="font-size: 30px;">
+        </div>
         <ul class="nav navbar-nav navbar-right">
 
-          <li><a href="#" id="signin" style="margin:15px 0 0 0">Профиль <i class="far fa-address-card"></i></a> </i>
+          <li><a href="#" id="signin" style="margin:15px 0 0 0">{{name}} <i class="far fa-address-card"></i></a>
+            </i>
           </li>
         </ul>
         </li>
@@ -80,9 +80,9 @@
     <div class="form_sld">
 
 
-      <a href="#" class="profile_btn" id="sliderprf">Профиль <i class="fas fa-user-tie"></i></a>
+      <a href="/prof" class="profile_btn" id="sliderprf">Профиль <i class="fas fa-user-tie"></i></a>
       <a href="#" class="profile_btn" id="sliderpev">События <i class="fas fa-star-half-alt"></i></a>
-      <a href="#" class="profile_btn" id="sliderpadw">Награды <i class="fas fa-award"></i></a>
+      <a href="/awards" class="profile_btn" id="sliderpadw">Награды <i class="fas fa-award"></i></a>
       <a href="#" class="profile_btn" id="sliderprt">Рейтинг <i class="fas fa-crown"></i></a>
       <a href="/logout" class="profile_btn " id="sliderout">Выйти <i class="fas fa-sign-out-alt"></i></a>
       </form>
@@ -159,7 +159,7 @@
   <script src="js/manip.js"></script>
 
   <script src="./js/sqrpt.js"></script>
-  <script src="./js/map.js"></script>
+
 </body>
 
 
