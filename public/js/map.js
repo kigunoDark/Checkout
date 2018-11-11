@@ -43,11 +43,19 @@ eventMarkerGroup = new H.map.Group();
 map.addObject(eventMarkerGroup);
 let eventMarkerDict = {};
 var eventCoords = null,
+  myCoords = null,
   startCoords = null,
   selectedMarker = null,
   polyline = null;
 
 map.addEventListener("tap", function(evt) {
+  console.log(polyline);
+  if (polyline == null) {
+    $("#deleteRoutBtn").css("display", "none");
+    // console.log($("#deleteRoutBtn").css("display"));
+  } else {
+    $("#deleteRoutBtn").css("display", "inline-block");
+  }
   eventCoords = map.screenToGeo(
     evt.currentPointer.viewportX,
     evt.currentPointer.viewportY
@@ -56,11 +64,12 @@ map.addEventListener("tap", function(evt) {
   if (target instanceof mapsjs.map.Marker) {
     reverseGeocode(platform);
     selectedMarker = target.label;
-    let eventMarkerWindowTitle = document.querySelector("h5#eventMarkerTitle");
+    let eventMarkerWindowTitle = document.querySelector("h1#eventMarkerTitle");
     let eventMarkerWindowDesc = document.querySelector("span#description");
     eventMarkerWindowDesc.innerText = eventMarkerDict[selectedMarker][0];
     eventMarkerWindowTitle.innerText = selectedMarker;
     $("#eventMarkerWindow").modal();
+    checkInEvent();
   } else {
     console.log(eventCoords);
     let eventMarkerWindowlng = document.querySelector("input#lng");
@@ -177,14 +186,26 @@ function myPosition() {
       lat: position.coords.latitude,
       lng: position.coords.longitude
     };
+    console.log(startCoords);
     calculateRouteFromAtoB(platform);
+  });
+}
+
+function toMyPos() {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    myCoords = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    };
+    console.log(myCoords.lat);
+    map.setCenter(myCoords);
+    map.setZoom(20);
   });
 }
 
 function routeMe() {
   if (polyline != null) {
     map.removeObject(polyline);
-    //TODO: ПОЯВЛЯЕТСЯ КНОПКА УДАЛИТЬ МАРШРУТ
   }
   myPosition();
   $("#eventMarkerWindow").modal("hide");
@@ -310,4 +331,55 @@ function enterSearch() {
 function deleteRout() {
   map.removeObject(polyline);
   $("#eventMarkerWindow").modal("hide");
+}
+
+function latlng2distance(lat1, long1, lat2, long2) {
+  //радиус Земли
+  var R = 6372795;
+  //перевод коордитат в радианы
+  lat1 *= Math.PI / 180;
+  lat2 *= Math.PI / 180;
+  long1 *= Math.PI / 180;
+  long2 *= Math.PI / 180;
+  //вычисление косинусов и синусов широт и разницы долгот
+  var cl1 = Math.cos(lat1);
+  var cl2 = Math.cos(lat2);
+  var sl1 = Math.sin(lat1);
+  var sl2 = Math.sin(lat2);
+  var delta = long2 - long1;
+  var cdelta = Math.cos(delta);
+  var sdelta = Math.sin(delta);
+  //вычисления длины большого круга
+  var y = Math.sqrt(
+    Math.pow(cl2 * sdelta, 2) + Math.pow(cl1 * sl2 - sl1 * cl2 * cdelta, 2)
+  );
+  var x = sl1 * sl2 + cl1 * cl2 * cdelta;
+  var ad = Math.atan2(y, x);
+  var dist = ad * R; //расстояние между двумя координатами в метрах
+  return dist;
+}
+
+function checkInEvent() {
+  let flg = false;
+  navigator.geolocation.getCurrentPosition(function(position) {
+    for (key in eventMarkerDict) {
+      let cooords = eventMarkerDict[key][1].getPosition();
+      let distance = latlng2distance(
+        cooords.lat,
+        cooords.lng,
+        position.coords.latitude,
+        position.coords.longitude
+      );
+      if (distance < 100) {
+        flg = true;
+      }
+      let valutaLabel = document.querySelector("label#valuta");
+      valutaLabel.innerText = 1000;
+    }
+    if (flg) {
+      alert("+1000 monet");
+    } else {
+      alert("Sorry...");
+    }
+  });
 }

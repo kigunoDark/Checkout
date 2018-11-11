@@ -8,11 +8,31 @@
 .noneNeed {
   display: none;
 }
+#deleteRoutBtn {
+  display: inline-block;
+}
+
+.navig {
+  position: absolute;
+  top: 110px;
+  left: 10px;
+  width: 35px;
+  z-index: 200;
+  cursor: pointer;
+}
+
 .modal-title_map {
   background: #64a0c2;
   color: white;
   text-transform: uppercase;
 }
+
+#modal_address {
+  display: block;
+  font-size: 20px;
+  color: #777;
+}
+
 .manip_map {
   cursor: pointer;
   height: 40px;

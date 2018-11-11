@@ -7,6 +7,12 @@
   font-family: AmaticSC-Regular; /* Гарнитура шрифта */
   src: url(./../fonts/AmaticSC-Regular.ttf); /* Путь к файлу со шрифтом */
 }
+
+@font-face {
+  font-family: myfont; /* Гарнитура шрифта */
+  src: url(./../fonts/12222.ttf); /* Путь к файлу со шрифтом */
+}
+
 body {
   background: #64a0c2;
   overflow: visible;
@@ -148,6 +154,27 @@ footer {
   width: 200px;
   right: 185px;
   /* border:1px solid red; */
+}
+
+.coin_img {
+  width: 40px;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: -20px;
+  vertical-align: middle;
+  font-family: myfont;
+  color: #777;
+}
+
+.num_valut {
+  color: white;
+  /* border-radius: 20px; */
+  background: #64a0c2;
+  font-size: 20px;
+  font-family: myfont;
+  /* padding: 5px; */
+  padding: 0 10px 0 10px;
+  border-radius: 50px;
 }
 
 .sliderU {
